@@ -1,0 +1,107 @@
+{
+  "n_customers": 42000,
+  "n_orders": 47430,
+  "repeat_purchase_rate": 0.11590476190476195,
+  "churn_rate": 0.884095238095238,
+  "retention_curve": {
+    "0": 100.0,
+    "1": 1.35,
+    "2": 2.81,
+    "3": 3.08,
+    "4": 3.08,
+    "5": 2.27,
+    "6": 0.5
+  },
+  "rfm_segments": {
+    "One-Time Buyer (At Risk of Never Returning)": {
+      "customers": 37132,
+      "revenue": 3822825.61
+    },
+    "Loyal / Steady": {
+      "customers": 3280,
+      "revenue": 676338.3
+    },
+    "Champions": {
+      "customers": 1346,
+      "revenue": 371651.41
+    },
+    "Lost / Lapsed Repeat Buyer": {
+      "customers": 242,
+      "revenue": 25124.06
+    }
+  },
+  "model": {
+    "logistic_auc": 0.615,
+    "random_forest_auc": 0.621,
+    "feature_importance": {
+      "delay_vs_estimate_days": 0.065,
+      "review_score": 0.0376,
+      "category_defect_rate": 0.0071,
+      "price": 0.0037,
+      "freight_ratio": -0.0014
+    },
+    "logit_coefficients": {
+      "delay_vs_estimate_days": 0.446,
+      "freight_ratio": -0.025,
+      "review_score": -0.269,
+      "category_defect_rate": 0.105,
+      "price": -0.052
+    }
+  },
+  "churn_rate_missed_delivery": 96.1,
+  "churn_rate_ontime_delivery": 86.3,
+  "pct_churn_uplift_from_missed_delivery": 11.3,
+  "top_churn_categories": {
+    "garden_tools": 93.4,
+    "baby": 89.5,
+    "furniture_decor": 89.2,
+    "electronics": 89.1,
+    "stationery": 89.0,
+    "fashion_bags": 88.7,
+    "pet_shop": 88.6,
+    "auto": 88.6,
+    "telephony": 88.6,
+    "computers_accessories": 88.5
+  },
+  "state_avg_delay_days": {
+    "AC": 5.28,
+    "RR": 5.25,
+    "AM": 4.67,
+    "PA": 3.86,
+    "RO": 3.62,
+    "MA": 3.6,
+    "CE": 3.13,
+    "PE": 2.98,
+    "MS": 2.65,
+    "BA": 2.5,
+    "MT": 2.44,
+    "GO": 2.13,
+    "DF": 2.08,
+    "RS": 1.72,
+    "SC": 1.65,
+    "PR": 1.17,
+    "MG": 1.16,
+    "ES": 1.06,
+    "RJ": 0.76,
+    "SP": 0.3
+  },
+  "scenario": {
+    "avg_order_value": 103.13,
+    "avg_orders_per_repeat_customer": 2.12,
+    "implied_ltv_repeat_customer": 218.17,
+    "orders_missed_gt_3days": 9051,
+    "assumed_reduction_in_missed_pct": 30.0,
+    "incremental_repeat_customers": 265.0,
+    "estimated_annual_revenue_lift": 57906.0
+  },
+  "revenue_at_risk": 1897228.0,
+  "order_defect_rate_pct": 19.9,
+  "repeat_purchase_rate_by_window_pct": {
+    "90": 5.54,
+    "180": 11.59,
+    "365": 11.59
+  },
+  "assumed_cac": 45.0,
+  "ltv_cac_ratio_repeat_customer": 4.85,
+  "ltv_cac_ratio_onetime_customer": 2.29
+}
