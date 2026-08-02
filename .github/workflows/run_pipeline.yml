@@ -1,0 +1,55 @@
+name: Run Olist Pipeline
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Prepare expected folder layout (/home/claude/olist_project)
+        run: |
+          mkdir -p /home/claude/olist_project/data /home/claude/olist_project/outputs /home/claude/olist_project/scripts
+          # copy provided data and scripts into /home/claude/olist_project so the scripts' hard-coded paths work
+          cp -a olist_project_package/data/. /home/claude/olist_project/data/ || true
+          cp -a olist_project_package/scripts/. /home/claude/olist_project/scripts/ || true
+          cp -a olist_project_package/outputs/. /home/claude/olist_project/outputs/ || true
+
+      - name: Run data generation and analysis (Python)
+        run: |
+          python /home/claude/olist_project/scripts/01_generate_data.py
+          python /home/claude/olist_project/scripts/02_analysis.py
+        env:
+          PYTHONUNBUFFERED: '1'
+
+      - name: Install Node dependencies
+        run: |
+          npm ci --prefer-offline --no-audit --progress=false
+
+      - name: Build executive summary (Node)
+        run: |
+          node olist_project_package/scripts/03_build_exec_summary.js || true
+
+      - name: Upload outputs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: olist-outputs
+          path: /home/claude/olist_project/outputs
