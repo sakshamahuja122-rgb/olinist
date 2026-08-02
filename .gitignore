@@ -1,0 +1,5 @@
+# Ignore outputs and environment artifacts
+olist_project_package/outputs/
+**/__pycache__/
+node_modules/
+.env
