@@ -1,0 +1,12 @@
+{
+  "name": "olinist",
+  "version": "1.0.0",
+  "description": "Olist retention diagnostic — supporting scripts",
+  "main": "scripts/02_analysis.py",
+  "scripts": {
+    "build-exec-summary": "node scripts/03_build_exec_summary.js"
+  },
+  "dependencies": {
+    "docx": "^8.3.0"
+  }
+}
