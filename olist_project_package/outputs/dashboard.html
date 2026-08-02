@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Olist Retention Diagnostic — Executive Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --navy:#0f1b2d;
+    --navy2:#152744;
+    --panel:#182a45;
+    --line:#25395c;
+    --ink:#e8edf5;
+    --dim:#8ea0bd;
+    --coral:#e0724f;
+    --amber:#e8b23e;
+    --green:#4fae8a;
+    --mono: 'JetBrains Mono','SF Mono',Consolas,monospace;
+    --sans: 'Inter','Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--navy); color:var(--ink);
+    font-family:var(--sans); padding:32px 40px 60px;
+  }
+  header{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:28px;
+    flex-wrap:wrap; gap:12px;
+  }
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--coral); text-transform:uppercase;}
+  h1{margin:6px 0 4px; font-size:26px; font-weight:700; letter-spacing:-0.01em;}
+  .sub{color:var(--dim); font-size:13.5px; max-width:640px;}
+  .badge{
+    font-family:var(--mono); font-size:11px; color:var(--dim); text-align:right;
+    border-left:1px solid var(--line); padding-left:16px;
+  }
+  .badge b{color:var(--ink); display:block; font-size:13px;}
+
+  .kpi-row{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px;}
+  .kpi{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:16px 18px;
+    position:relative; overflow:hidden;
+  }
+  .kpi::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--coral);}
+  .kpi.green::before{background:var(--green);}
+  .kpi.amber::before{background:var(--amber);}
+  .kpi-label{font-family:var(--mono); font-size:10.5px; color:var(--dim); text-transform:uppercase; letter-spacing:.08em;}
+  .kpi-val{font-size:28px; font-weight:700; margin-top:6px; letter-spacing:-0.02em;}
+  .kpi-note{font-size:11.5px; color:var(--dim); margin-top:4px;}
+
+  .grid{display:grid; grid-template-columns:1.3fr 1fr; gap:16px; margin-bottom:16px;}
+  .grid3{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:18px 20px;}
+  .panel h3{margin:0 0 2px; font-size:14px; font-weight:600;}
+  .panel .desc{color:var(--dim); font-size:11.5px; margin-bottom:14px;}
+  canvas{max-height:260px;}
+
+  .finding{
+    background:linear-gradient(135deg, rgba(224,114,79,.10), rgba(224,114,79,.02));
+    border:1px solid rgba(224,114,79,.35); border-radius:6px; padding:20px 22px; margin-bottom:16px;
+  }
+  .finding .eyebrow{color:var(--amber);}
+  .finding p{font-size:14px; line-height:1.6; margin:8px 0 0; color:var(--ink);}
+  .finding p b{color:var(--coral);}
+
+  table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  th{text-align:left; font-family:var(--mono); font-size:10px; text-transform:uppercase; color:var(--dim); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line);} 
+  td{padding:7px 8px; border-bottom:1px solid rgba(37,57,92,.5);} 
+  tr:last-child td{border-bottom:none;} 
+  .risk-list li{margin:0;} 
+  .watchlist{list-style:none; margin:0; padding:0; font-family:var(--mono); font-size:12px;} 
+  .watchlist li{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(37,57,92,.5);} 
+  .watchlist li:last-child{border-bottom:none;} 
+  .watchlist .tag{color:var(--coral); font-size:10.5px;} 
+n  footer{margin-top:28px; color:var(--dim); font-size:11px; font-family:var(--mono); border-top:1px solid var(--line); padding-top:14px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">Retention Diagnostic · Case Study</div>
+    <h1>Why 88% of Olist Buyers Never Return — and What to Do About It</h1>
+    <div class="sub">Analysis of 42,000 customers / 47,430 orders on the Brazilian e-commerce marketplace. Delivery reliability, not shipping speed, is the dominant churn driver.</div>
+  </div>
+  <div class="badge">
+    DATA WINDOW<b>Jan 2022 – Dec 2023</b>
+    MODEL<b>Logistic Reg. + Random Forest</b>
+  </div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="kpi-label">Churn Rate (1st→2nd order)</div>
+    <div class="kpi-val" id="kpi-churn">—</div>
+    <div class="kpi-note">of first-time buyers never reorder</div>
+  </div>
+... (file truncated in this message)
